@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+*.bak
+*.tmp
+venv/
+node_modules/
+*.pyc
+__pycache__/
+*.egg-info

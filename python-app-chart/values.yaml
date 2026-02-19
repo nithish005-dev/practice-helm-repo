@@ -1,0 +1,25 @@
+replicaCount: 2
+
+image:
+  repository: nithish005/python-app
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5000
+
+containerPort: 5000
+
+imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
