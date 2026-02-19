@@ -1,0 +1,46 @@
+name: Helm Chart CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Lint chart
+        run: helm lint python-app-chart
+
+      - name: Render templates
+        run: helm template python-app-chart
+
+  package:
+    runs-on: ubuntu-latest
+    needs: lint-and-template
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Package chart
+        run: |
+          mkdir -p charts
+          helm package python-app-chart -d charts
+
+      - name: Upload packaged chart
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-app-chart
+          path: charts/*.tgz
