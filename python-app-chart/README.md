@@ -10,3 +10,5 @@ Usage:
 ```
 helm install my-python-app ./python-app-chart
 ```
+
+PR: add helm chart (automated)
