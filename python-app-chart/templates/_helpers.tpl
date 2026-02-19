@@ -15,8 +15,8 @@ Common template helpers for generating names and labels.
 {{- end -}}
 
 {{- define "python-app.labels" -}}
-app.kubernetes.io/name: {{ include "python-app.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/version: {{ .Chart.AppVersion }}
+app.kubernetes.io/name: {{ include "python-app.name" . | quote }}
+app.kubernetes.io/instance: {{ .Release.Name | quote }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: Helm
 {{- end -}}
